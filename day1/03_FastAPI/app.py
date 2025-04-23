@@ -13,7 +13,7 @@ from pyngrok import ngrok
 
 # --- 設定 ---
 # モデル名を設定
-MODEL_NAME = "google/gemma-2-2b-jpn-it"  # お好みのモデルに変更可能です
+MODEL_NAME = "llm-jp/llm-jp-3-1.8b"  # お好みのモデルに変更可能です
 print(f"モデル名を設定: {MODEL_NAME}")
 
 # --- モデル設定クラス ---
@@ -70,7 +70,8 @@ def load_model():
             "text-generation",
             model=config.MODEL_NAME,
             model_kwargs={"torch_dtype": torch.bfloat16},
-            device=device
+            device=device,
+            trust_remote_code=True
         )
         print(f"モデル '{config.MODEL_NAME}' の読み込みに成功しました")
         model = pipe  # グローバル変数を更新
